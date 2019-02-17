@@ -1,0 +1,25 @@
+{#{% if latest_question_list %}#}
+{#    <p1>this is latest_question_list:{{ latest_question_list }}</p1>#}
+{#    <ul>#}
+{#        {% for question in latest_question_list %}#}
+{#            <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">#}
+{#            <a>{{ forloop.counter }}</a>#}
+{#            <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}//href={% url "polls:detail" question.id %}</a></li>#}
+{#        {% endfor %}#}
+{#    </ul>#}
+{#{% else %}#}
+{#    <p>No polls are available.</p>#}
+{#{% endif %}#}
+
+{% if error %}
+{{ error }}
+{% else %}
+<form action="{% url 'polls:detail' %}" method="post">
+    {% csrf_token %}
+    {% for question in latest_question_list %}
+        <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ question.id }}">
+        <label for="choice{{ forloop.counter}}">{{ question }}</label><br>
+    {% endfor %}
+    <input type="submit" value="Vote">
+</form>
+{% endif %}

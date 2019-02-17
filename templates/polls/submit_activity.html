@@ -1,0 +1,59 @@
+{% extends "polls/home_page.html" %}
+{% block mainbody %}
+    <div class="container" style="background: url('../../static/polls/images/wall.jpg');position: absolute;position: center; width:100%;height:100%; background-size: 100%100%; ">
+        <div class="py-5 text-center">
+            <h2>活动发布</h2>
+        </div>
+
+        <div class="row" style="width: 100%;padding-left: 30%;padding-right: 30%">
+            <form class="needs-validation" action="{% url "polls:submit_activity" %}" method="post">
+            {% csrf_token %}
+                <div class="mb-3">
+                    <label for="title">主题</label>
+                    <input name="title" type="text" class="form-control" id="title" placeholder="本次活动的简要概述" value="" required="">
+
+                </div>
+
+                <div class="form-group">
+                    <label for="name">选择地点</label>
+
+                    <select class="form-control" name="selected_location">
+                        {% for l in location_list %}
+                            <option>{{ l }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="beginTime">开始时间</label>
+                        <input name='begin_time' type="datetime-local" class="form-control" id="beginTime" value="" required="">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="endTime">结束时间</label>
+                        <input name='end_time' type="datetime-local" class="form-control" id="endTime" value="" required="">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="phoneNumber">电话号码</label>
+                    <input name='phone_number' type="text" class="form-control" id="phoneNumber" placeholder="本次活动联系方式" value="" required="">
+
+                </div>
+                <div class="mb-3">
+                    <label for="activityDetail">活动详细内容</label>
+                    <textarea class="form-control" id="activityDetail" name="event_detail"></textarea>
+
+                </div>
+
+                <button  value="{{ user.user_id }}" class="btn btn-primary btn-lg btn-block" name='button' type="submit">提交</button>
+            </form>
+
+        </div>
+
+        <footer class="my-5 pt-5 text-muted text-left text-small">
+            <p class="mb-1">© 2017-2018 dotogether.cn</p>
+
+        </footer>
+
+</div>
+{% endblock %}

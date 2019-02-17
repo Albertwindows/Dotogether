@@ -1,0 +1,23 @@
+html,
+body {
+  height: 100%;
+}
+li a {
+  color: green;
+}
+.container {
+  max-width: 960px;
+}
+div {
+  text-align: center;
+}
+input{
+  text-align: center;
+  vertical-align: center;
+  position: relative;
+}
+button{
+  outline: None;
+  border: None;
+  color: #1d2124;
+}

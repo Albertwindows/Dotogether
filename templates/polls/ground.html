@@ -1,0 +1,40 @@
+{%  extends "polls/home_page.html" %}
+{% block mainbody %}
+    {% load my_filter %}
+    {% if error %}
+    {{ error }}
+    {% endif %}
+    <div class="container"  style="padding-left: 30%;padding-right: 30%;background: url('../../static/polls/images/mountain.jpg');position: absolute;position: center; width:100%;height:120%; background-size: 100%100%; ">
+    {% for eve in event_list %}
+        <div class="panel panel-info">
+            <div class="panel-heading" name="user_id">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion"
+                       href="#collapse{{ forloop.counter0 }}">
+                        {{ eve.event_title}}
+                    </a>
+                </h4>
+            </div>
+            <div id="collapse{{ forloop.counter0 }}" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <table class="table">
+                        <tr><td>地点</td> <td>{{ eve.location.location_name }}</td></tr>
+                        <tr><td>开始时间</td> <td>{{ eve.start_time }}</td></tr>
+                        <tr><td>结束时间</td> <td>{{ eve.end_time }}</td></tr>
+                        <tr><td>现在参加的人数：</td> <td>{{ cnt_event|indexof:forloop.counter0 }}</td></tr>
+                        <tr><td></td><td>
+                            <form class="form-signin" action="{% url 'polls:join_activity' %}" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="user_id" value="{{ user.user_id }}">
+                                <input type="hidden" name="event_id" value="{{ eve.id }}">
+                                <button class="btn btn-success" type="submit">参加</button>
+                            </form>
+                        </td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+
+{% endblock %}

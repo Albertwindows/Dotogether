@@ -1,0 +1,9 @@
+<h1>投票后的结果：</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>
+{% else %}
+    {% for q in questions %}
+        <a href="{%  url 'polls:results' q.id %}" >{{ forloop.counter }} : {{ q }}---{{ q.votes }}</a><br>
+    {% endfor %}
+{% endif %}
+

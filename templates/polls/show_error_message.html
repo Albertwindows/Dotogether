@@ -1,0 +1,6 @@
+{%  extends "polls/home_page.html" %}
+{% block mainbody %}
+    {% if error %}
+        <h1 style="color: #ff0000;text-align: center">{{ error }}</h1>
+    {% endif %}
+{% endblock %}
